@@ -1,1 +1,4 @@
 *.[adios]
+test/test
+*.gcda
+*.gcno
