@@ -1,5 +1,5 @@
 CPPFLAGS:=-I../include
-CFLAGS:=-MMD --std=c99 -W -Wall -pedantic -Werror --coverage
+CFLAGS:=-MMD --std=c99 -W -Wall -pedantic -Werror --coverage -save-temps -O2
 ARFLAGS:=-crs
 
 .PHONY: all
