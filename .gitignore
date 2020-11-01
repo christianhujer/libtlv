@@ -1,4 +1,10 @@
+# IntelliJ IDEA / CLion / CMake
+.idea/
+cmake-build-*/
+
+# make
 *.[adios]
 test/test
+test_main
 *.gcda
 *.gcno
