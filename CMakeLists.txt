@@ -8,3 +8,6 @@ add_library(tlv src/tlv.c include/tlv.h)
 add_executable(libtlv_test test/test_main.c test/tlv_test.c test/tlv_test.h)
 target_link_libraries(libtlv_test tlv)
 include_directories(include)
+
+enable_testing()
+add_test(libtlv_test libtlv_test)
