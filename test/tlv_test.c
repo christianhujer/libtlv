@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "tlv.h"
+#include "tlv_test.h"
 
-void badCaseTest(const uint8_t data[], size_t dataLength) {
+void testGetVNLengthBadCase(const uint8_t data[], size_t dataLength) {
     uint8_t *ptr = malloc(dataLength);
     assert(ptr != NULL);
     memcpy(ptr, data, dataLength);
@@ -18,11 +19,11 @@ void badCaseTest(const uint8_t data[], size_t dataLength) {
     free(ptr);
 }
 
-void testBadCases() {
+void testGetVNLengthBadCases() {
 #define badCase(...) \
     do { \
         const uint8_t data[] = { __VA_ARGS__ }; \
-        badCaseTest(data, sizeof(data)); \
+        testGetVNLengthBadCase(data, sizeof(data)); \
     } while (false)
 
     badCase(0x80);
@@ -39,7 +40,7 @@ void testBadCases() {
 #undef badCase
 }
 
-void goodCaseBeforeEndOfBufferTest(const uint8_t data[], size_t dataLength, ssize_t expected) {
+void testGetVNLengthGoodCase(const uint8_t data[], size_t dataLength, ssize_t expected) {
     uint8_t *ptr = malloc(dataLength);
     assert(ptr != NULL);
     memcpy(ptr, data, dataLength);
@@ -57,11 +58,11 @@ void goodCaseBeforeEndOfBufferTest(const uint8_t data[], size_t dataLength, ssiz
     free(ptr);
 }
 
-void testGoodCases() {
+void testGetVNLengthGoodCases() {
 #define goodCase(expected, ...) \
     do { \
         const uint8_t data[] = { __VA_ARGS__ }; \
-        goodCaseBeforeEndOfBufferTest(data, sizeof(data), expected); \
+        testGetVNLengthGoodCase(data, sizeof(data), expected); \
     } while (false)
 
     goodCase(         0, 0x00);
@@ -80,7 +81,11 @@ void testGoodCases() {
 #undef goodCase
 }
 
-int main(void) {
-    testGoodCases();
-    testBadCases();
+void testGetVNLength() {
+    testGetVNLengthGoodCases();
+    testGetVNLengthBadCases();
+}
+
+void tlv_test() {
+    testGetVNLength();
 }
